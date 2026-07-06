@@ -33,7 +33,7 @@ ID_CARPETA_DRIVE_DESTINO = "12XmKunZ06nXTgePl5Wb5ZlOZ_2C3hdT7"  # Carpeta "Repor
 
 # 3. Horarios y tiempos de envío
 HORA_INICIO = 19                         # Empieza a las 7:00 PM (hora militar)
-HORA_FIN = 1                             # Termina a las 1:00 AM del día siguiente
+HORA_FIN = 2                             # Termina a las 2:00 AM del día siguiente (Actualizado 🚀)
 INTERVALO_MEDIO = 35                     # Espera promedio de 35 minutos entre fotos
 # =====================================================================
 
@@ -271,8 +271,9 @@ def bucle_principal_bot():
             time.sleep(3600)
             continue
 
-        if hora_actual >= HORA_FIN and hora_actual < HORA_INICIO:
-            BOT_STATUS = "Fuera de horario (7 PM - 1 AM)"
+        # Ventana de horario inactivo (Entre las 2:00 AM y las 7:00 PM)
+        if HORA_FIN <= hora_actual < HORA_INICIO:
+            BOT_STATUS = "Fuera de horario (7 PM - 2 AM)"
             time.sleep(900)
             continue
 
