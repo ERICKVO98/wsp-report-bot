@@ -25,11 +25,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 # CONFIGURACIÓN PERSONALIZADA DEL BOT
 # =====================================================================
 # 1. ESCRIBE EL NOMBRE EXACTO DE TU GRUPO ENTRE LAS COMILLAS
-GRUPO_ID = "Escribe Aquí El Nombre De Tu Grupo"     
+GRUPO_ID = "MDP - COMPROMISO 3 2025"     
 
 # 2. IDs de tus carpetas de Google Drive
-ID_CARPETA_DRIVE_ORIGEN = "TU_ID_DE_ORIGEN"    
-ID_CARPETA_DRIVE_DESTINO = "TU_ID_DE_DESTINO"  
+ID_CARPETA_DRIVE_ORIGEN = "1gw5gnpC6vrf24JWcJXl4VbdyC5WAiVjJ"    
+ID_CARPETA_DRIVE_DESTINO = "12XmKunZ06nXTgePl5Wb5ZlOZ_2C3hdT7"  
 
 # 3. Horarios y tiempos de envío
 HORA_INICIO = 19                         
