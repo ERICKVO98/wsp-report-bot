@@ -59,7 +59,7 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => console.log(`💻 Servidor web corriendo en puerto ${port}`));
 
-// Inicializar WhatsApp Client
+// Inicializar WhatsApp Client con configuración de supervivencia
 const client = new Client({
     authStrategy: new LocalAuth({ dataPath: '/tmp/wsp_auth' }),
     puppeteer: {
@@ -68,12 +68,16 @@ const client = new Client({
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
-            '--disable-gpu'
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process', // A veces ayuda en entornos de RAM muy limitada
+            '--disable-gpu',
+            '--disable-extensions'
         ],
         executablePath: '/usr/bin/chromium'
     }
 });
-
 client.on('qr', (qr) => {
     // Convertir el QR a imagen para mostrarlo en la web
     qrCodeImage = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qr)}`;
