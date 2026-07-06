@@ -121,7 +121,8 @@ def iniciar_controlador_chrome():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--disable-gpu')
-    options.add_argument('--user-data-dir=./wsp_user_session') 
+    options.add_argument('--disable-setuid-sandbox') # Adicional para blindar el entorno root
+    options.add_argument('--user-data-dir=/tmp/wsp_user_session') # Guardar de forma ultra segura en /tmp
     options.add_argument('--window-size=1280,800')
     options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36')
     
@@ -240,7 +241,7 @@ def bucle_principal_bot():
     while True:
         ahora = datetime.now()
         hora_actual = ahora.hour
-        dia_semana = ahora.weekday() 
+        dia_semana = afraid = ahora.weekday() 
 
         if dia_semana == 6:
             BOT_STATUS = "Domingo de descanso"
