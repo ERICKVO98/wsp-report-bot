@@ -19,7 +19,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 
 # =====================================================================
 # CONFIGURACIÓN PERSONALIZADA DEL BOT
@@ -117,30 +116,19 @@ def get_screenshot():
 def iniciar_controlador_chrome():
     global global_driver
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless=new')  # Forzar el nuevo headless que es más estable
+    options.add_argument('--headless')  
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-setuid-sandbox')
-    options.add_argument('--disable-software-rasterizer')
-    options.add_argument('--remote-debugging-port=9222')  # Crucial para que ChromeDriver conecte
+    options.add_argument('--disable-extensions')
     
-    # Generar ruta única por ejecución para romper candados fantasmas de RAM
-    ruta_unica_sesion = f"/tmp/wsp_session_{int(time.time())}"
-    options.add_argument(f'--user-data-dir={ruta_unica_sesion}')
+    # Ruta de sesión limpia para evitar bloqueos del pasado
+    options.add_argument('--user-data-dir=/tmp/wsp_live_session')
     
-    options.add_argument('--window-size=1280,800')
-    options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36')
-    
-    if os.path.exists('/usr/bin/chromium'):
-        options.binary_location = '/usr/bin/chromium'
-    elif os.path.exists('/usr/bin/chromium-browser'):
-        options.binary_location = '/usr/bin/chromium-browser'
-        
-    if os.path.exists('/usr/bin/chromedriver'):
-        service = Service('/usr/bin/chromedriver')
-    else:
-        service = Service(ChromeDriverManager().install())
+    # Forzar uso del binario nativo instalado por el Dockerfile
+    options.binary_location = '/usr/bin/chromium'
+    service = Service('/usr/bin/chromedriver')
         
     driver = webdriver.Chrome(service=service, options=options)
     global_driver = driver
@@ -245,7 +233,7 @@ def bucle_principal_bot():
     while True:
         ahora = datetime.now()
         hora_actual = ahora.hour
-        dia_semana = shifted_day = ahora.weekday() 
+        dia_semana = ahora.weekday() 
 
         if dia_semana == 6:
             BOT_STATUS = "Domingo de descanso"
