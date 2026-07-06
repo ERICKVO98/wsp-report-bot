@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Definir variables de entorno de sistema para que Selenium encuentre Chrome sin fallar
+# ¡CORRECCIÓN AQUÍ MAESTRO!: La ruta real en el servidor es /usr/bin/chromedriver
 ENV CHROME_BIN=/usr/bin/chromium
-ENV CHROMEDRIVER_PATH=/usr/bin/chromium-driver
+ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 
 WORKDIR /app
 
