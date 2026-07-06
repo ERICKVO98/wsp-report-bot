@@ -7,9 +7,9 @@ const path = require('path');
 // =====================================================================
 // CONFIGURACIÓN PERSONALIZADA DEL BOT
 // =====================================================================
-const GRUPO_NOMBRE = "Escribe Aquí El Nombre De Tu Grupo"; 
-const ID_CARPETA_ORIGEN = "TU_ID_DE_ORIGEN";     // Carpeta "Reportes_Hoy"
-const ID_CARPETA_DESTINO = "TU_ID_DE_DESTINO";   // Carpeta "Reportes_Enviados"
+const GRUPO_NOMBRE = "MDP - COMPROMISO 3 2025"; 
+const ID_CARPETA_ORIGEN = "1gw5gnpC6vrf24JWcJXl4VbdyC5WAiVjJ";     // Carpeta "Reportes_Hoy"
+const ID_CARPETA_DESTINO = "12XmKunZ06nXTgePl5Wb5ZlOZ_2C3hdT7";   // Carpeta "Reportes_Enviados"
 
 const HORA_INICIO = 19; // 7:00 PM
 const HORA_FIN = 2;    // 2:00 AM
