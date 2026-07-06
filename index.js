@@ -63,19 +63,19 @@ app.listen(port, () => console.log(`💻 Servidor web corriendo en puerto ${port
 const client = new Client({
     authStrategy: new LocalAuth({ dataPath: '/tmp/wsp_auth' }),
     puppeteer: {
-        headless: true,
-        args: [
-            '--no-sandbox',
-            '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage',
-            '--disable-accelerated-2d-canvas',
-            '--no-first-run',
-            '--no-zygote',
-            '--single-process', // A veces ayuda en entornos de RAM muy limitada
-            '--disable-gpu',
-            '--disable-extensions'
-        ],
-        executablePath: '/usr/bin/chromium'
+    headless: 'new', // Forzamos el modo headless nativo de Chrome 120+
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--no-zygote',
+        '--disable-extensions',
+        '--disable-dbus', // Desactivar comunicación con el bus del sistema
+        '--disable-sync'
+    ],
+    executablePath: '/usr/bin/chromium'
+}
     }
 });
 client.on('qr', (qr) => {
