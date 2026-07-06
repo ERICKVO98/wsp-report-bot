@@ -117,12 +117,16 @@ def get_screenshot():
 def iniciar_controlador_chrome():
     global global_driver
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless=new')  
+    options.add_argument('--headless')  # Headless clásico para ahorrar memoria crítica
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--disable-gpu')
-    options.add_argument('--disable-setuid-sandbox') # Adicional para blindar el entorno root
-    options.add_argument('--user-data-dir=/tmp/wsp_user_session') # Guardar de forma ultra segura en /tmp
+    options.add_argument('--disable-setuid-sandbox')
+    options.add_argument('--disable-crash-reporter') # Desactivar Crashpad completamente
+    options.add_argument('--disable-extensions')
+    options.add_argument('--no-zygote') # Evitar pre-carga de procesos pesados
+    options.add_argument('--single-process') # ¡CRUCIAL! Todo en un proceso único para no pasar los 512MB de RAM
+    options.add_argument('--user-data-dir=/tmp/wsp_user_session') # Carpeta con accesos libres de escritura
     options.add_argument('--window-size=1280,800')
     options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36')
     
@@ -216,7 +220,7 @@ def bucle_principal_bot():
         driver.get("https://web.whatsapp.com")
     except Exception as e:
         BOT_STATUS = f"Error crítico al iniciar Chrome: {str(e)}"
-        return # Detiene el hilo y muestra el error exacto en pantalla
+        return
 
     while True:
         try:
@@ -241,7 +245,7 @@ def bucle_principal_bot():
     while True:
         ahora = datetime.now()
         hora_actual = ahora.hour
-        dia_semana = afraid = ahora.weekday() 
+        dia_semana = ahora.weekday() 
 
         if dia_semana == 6:
             BOT_STATUS = "Domingo de descanso"
@@ -281,7 +285,7 @@ def bucle_principal_bot():
             continue
 
         variacion = random.randint(-5, 5)
-        espera_minutos = max(5, INTERVALO_MEDIO + variacion)
+        espera_minutos = max(5, INTERVALO_MEDIO + variacion) # Corregido error de escritura (variacion)
         BOT_STATUS = f"En espera por {espera_minutos} min..."
         time.sleep(espera_minutos * 60)
 
