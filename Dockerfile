@@ -11,9 +11,16 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# ¡CORRECCIÓN AQUÍ MAESTRO!: La ruta real en el servidor es /usr/bin/chromedriver
+# Definir variables de entorno de sistema para que Selenium encuentre Chrome sin fallar
 ENV CHROME_BIN=/usr/bin/chromium
 ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
+
+# =====================================================================
+# TRUCO MAESTRO: Forzar a Chromium y a su manejador de caídas (Crashpad)
+# a usar carpetas temporales de escritura libre en Render
+# =====================================================================
+ENV XDG_CONFIG_HOME=/tmp/.chromium
+ENV XDG_CACHE_HOME=/tmp/.chromium
 
 WORKDIR /app
 
