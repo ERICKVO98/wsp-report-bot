@@ -1,0 +1,7 @@
+Flask3.0.2
+google-api-python-client2.122.0
+google-auth-httplib20.2.0
+google-auth-oauthlib1.2.0
+selenium4.18.1
+webdriver-manager4.0.1
+urllib3==2.2.1
